@@ -49,6 +49,27 @@ void cargarDatos(double **matriz)
 }
 
 
+
+void obtenerCoordenadas(double **matriz, double *x,double *y)
+{	
+	int k=0;
+	int i;
+	int j;
+	for( i=0; i<ny; i++)
+	{
+		for( j=0; j<nx; j++)
+		{
+			if(matriz[i][j]==1)
+			{
+				x[k]=(double)i;
+				y[k]=(double)j;
+				k=k+1;			
+			}
+		}
+	}
+	
+}
+
 double **Matriz(void)
 {
     int i;
