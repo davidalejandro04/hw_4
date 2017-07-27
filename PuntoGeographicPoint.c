@@ -20,3 +20,31 @@ double *x;
 double *y;
 double rmax,xmax,ymax;
 
+
+void cargarDatos(double **matriz)
+{
+
+	char *delimiter=" ";
+
+	FILE* f = fopen("map_data.txt", "r");
+
+	char data[10000];
+	char * pch;
+	int i;
+	int j=0;
+	while(fscanf(f, "%s",data)==1)
+	{
+		
+
+			pch = strtok(data," ");
+			matriz[j/744][j%744]=atof(pch);
+
+			j++;
+	}
+	pch=strtok(NULL, " ");
+
+
+	fclose(f);
+
+}
+
