@@ -45,28 +45,36 @@ void hallarPuntin()
 	double xActual, xAnterior, yActual, yAnterior, rActual, rAnterior, alfa;
 
 	xAnterior = (2*aleatorio()*N/744);
-	yActual = (2*aleatorio()*N/500 );
+	yAnterior = (2*aleatorio()*N/500 );
 	rAnterior = calcularRadio(xAnterior, yActual);
 	
 
-	FILE *file = fopen("datos_out.dat", "w");
+	FILE *file = fopen("radios.dat", "w");
 
 	for(i=0; i<500; i++)
 	{
 
 		xActual = xAnterior + (2*aleatorio() - 1)*delta;
-		yAnterior = yActual + (2*aleatorio() - 1)*delta;
+		yActual = yAnterior + (2*aleatorio() - 1)*delta;
 
 		if(xActual<0 )
 		{	
 			xActual=744-xActual;
 		}
+		if(yAnterior<0 )
+		{	
+			yAnterior=500-yAnterior;
+		}
 		if(xActual>744 )
 		{	
 			xActual=744-xActual;
 		}
-
-		rActual = calcularRadio(xActual, yAnterior);
+		if(yAnterior>500 )
+		{	
+			yAnterior=500-yAnterior;
+		}
+		
+		rActual = calcularRadio(xActual, yActual);
 		alfa = exp((rActual - rAnterior));
 
 		if(rActual>rmax)
@@ -82,12 +90,12 @@ void hallarPuntin()
 			if(alfa > aleatorio())
 			{
 				xAnterior = xActual;
-				yActual = yAnterior;
+				yAnterior = yActual;
 				rAnterior = rActual;
 			}
-			fprintf(file, "%f %f %f\n", xAnterior, yActual, rAnterior);
+			fprintf(file, "%f %f %f\n", xAnterior, yAnterior, rAnterior);
 	}
-	fprintf(file, "%f %f %f\n", xAnterior, yActual, rAnterior);
+	fprintf(file, "%f %f %f\n", xAnterior, yAnterior, rAnterior);
 	fclose(file);
 
 
