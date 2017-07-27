@@ -61,19 +61,11 @@ void hallarPuntin()
 		{	
 			xActual=744-xActual;
 		}
-		if(yAnterior<0 )
-		{	
-			yAnterior=500-yAnterior;
-		}
 		if(xActual>744 )
 		{	
 			xActual=744-xActual;
 		}
-		if(yAnterior>500 )
-		{	
-			yAnterior=500-yAnterior;
-		}
-		
+
 		rActual = calcularRadio(xActual, yAnterior);
 		alfa = exp((rActual - rAnterior));
 
@@ -102,11 +94,11 @@ void hallarPuntin()
 	//Regla de tres para las coordenadas
 	xmax=-xmax*2*180/nx;
 	ymax=ymax*2*90/ny-90;
-	rmax=rmax/744;
+	rmax=rmax*20000/744;
 
 
 	//Imprimir punto
-	printf("El radio mas grande es :%lfKm\nEn la latitud: %lf y en la longitud: %lf\n",rmax,ymax,xmax);
+	printf("El radio mas grande es :%lfKm\nEn las coordenadas: latitud: %lf longitud: %lf\n",rmax,ymax,xmax);
 
 }
 
