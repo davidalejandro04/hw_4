@@ -70,6 +70,26 @@ void obtenerCoordenadas(double **matriz, double *x,double *y)
 	
 }
 
+double calcularRadio(double x0, double y0)
+{
+    int i;
+    double min, actual;
+    min = pow(pow(x[0] - x0, 2.0) + pow(y[0] - y0, 2.0), 0.5);
+    for(i = 1; i<N; i++)
+    {
+	
+		actual = pow(pow(x[i] - x0, 2.0) + pow(y[i] - y0, 2.0), 0.5);
+		if(actual < min)
+		{
+		    min = actual;
+		}
+	
+    }
+    return min;
+}
+
+
+
 double **Matriz(void)
 {
     int i;
