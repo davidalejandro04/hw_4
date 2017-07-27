@@ -20,6 +20,38 @@ double *x;
 double *y;
 double rmax,xmax,ymax;
 
+int main(void)
+{   
+	
+	int i,j;
+	
+	x= malloc(N*sizeof(double));
+	y= malloc(N*sizeof(double)); 
+	
+	double **matriz;
+
+	matriz=Matriz();
+	
+	cargarDatos(matriz);
+
+	obtenerCoordenadas(matriz,x,y);
+	FILE *abrir;
+
+
+	abrir = fopen("porc.dat", "w");
+
+	for (i = 0; i < N; i++)
+	{
+		fprintf(abrir, "%f %f\n", x[i],y[i]);
+
+	}
+	
+	fclose(abrir);
+
+return 0;
+
+
+}
 
 void cargarDatos(double **matriz)
 {
