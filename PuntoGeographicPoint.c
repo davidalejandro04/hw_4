@@ -48,3 +48,29 @@ void cargarDatos(double **matriz)
 
 }
 
+
+double **Matriz(void)
+{
+    int i;
+    double **matriz;
+    matriz = malloc(ny*sizeof(double *));
+
+    for(i = 0; i < ny; i++)
+    {
+        matriz[i] = malloc(nx*sizeof(double *));
+    }
+
+    return matriz;
+}	  
+
+
+void freeMatriz(double **matriz)
+{
+    int i;
+    for(i = 0; i<ny; i++)
+    {
+        free(matriz[i]);
+    }
+    free(matriz);
+}
+
