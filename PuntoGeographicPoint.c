@@ -35,19 +35,6 @@ int main(void)
 	cargarDatos(matriz);
 
 	obtenerCoordenadas(matriz,x,y);
-	FILE *abrir;
-
-
-	abrir = fopen("porc.dat", "w");
-
-	for (i = 0; i < N; i++)
-	{
-		fprintf(abrir, "%f %f\n", x[i],y[i]);
-
-	}
-	
-	fclose(abrir);
-
 
 	double xActual, xAnterior, yActual, yAnterior, rActual, rAnterior, alfa;
 
