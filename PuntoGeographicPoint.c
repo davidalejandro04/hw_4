@@ -10,42 +10,103 @@ double **Matriz(void);
 double aleatorio(void);
 double calcularRadio(double x0, double y0);
 void freeMatriz(double **matriz);
+void hallarPuntin(void);
 
 int nx=744;
 int ny=500;
 int N=120877;
 
-double delta = 2;
+double delta = 2.5;
 double *x;
 double *y;
 double rmax,xmax,ymax;
+double **matriz;
+int i,j;
+
 
 int main(void)
 {   
 	
-	int i,j;
-	
 	x= malloc(N*sizeof(double));
 	y= malloc(N*sizeof(double)); 
-	
-	double **matriz;
-
 	matriz=Matriz();
-	
 	cargarDatos(matriz);
-
 	obtenerCoordenadas(matriz,x,y);
+	hallarPuntin();
+
+return 0;
+
+
+}
+
+void hallarPuntin()
+{
 
 	double xActual, xAnterior, yActual, yAnterior, rActual, rAnterior, alfa;
 
 	xAnterior = (2*aleatorio()*N/744);
 	yActual = (2*aleatorio()*N/500 );
-	printf("%lf %lf\n",xAnterior,yActual);
 	rAnterior = calcularRadio(xAnterior, yActual);
 	
 
-return 0;
+	FILE *file = fopen("datos_out.dat", "w");
 
+	for(i=0; i<500; i++)
+	{
+
+		xActual = xAnterior + (2*aleatorio() - 1)*delta;
+		yAnterior = yActual + (2*aleatorio() - 1)*delta;
+
+		if(xActual<0 )
+		{	
+			xActual=744-xActual;
+		}
+		if(yAnterior<0 )
+		{	
+			yAnterior=500-yAnterior;
+		}
+		if(xActual>744 )
+		{	
+			xActual=744-xActual;
+		}
+		if(yAnterior>500 )
+		{	
+			yAnterior=500-yAnterior;
+		}
+		
+		rActual = calcularRadio(xActual, yAnterior);
+		alfa = exp((rActual - rAnterior));
+
+		if(rActual>rmax)
+		{
+			rmax =rActual;
+			ymax =yActual;
+			xmax=xActual;
+		}
+			if(alfa > 1)
+			{
+				alfa = 1;
+			}
+			if(alfa > aleatorio())
+			{
+				xAnterior = xActual;
+				yActual = yAnterior;
+				rAnterior = rActual;
+			}
+			fprintf(file, "%f %f %f\n", xAnterior, yActual, rAnterior);
+	}
+	fprintf(file, "%f %f %f\n", xAnterior, yActual, rAnterior);
+	fclose(file);
+
+
+	//Regla de tres para las coordenadas
+	xmax=-xmax*2*180/nx;
+	ymax=ymax*2*90/ny-90;
+	rmax=rmax/744;
+
+
+	//Imprimir punto
+	printf("El radio mas grande es :%lfKm\nEn la latitud: %lf y en la longitud: %lf\n",rmax,ymax,xmax);
 
 }
 
