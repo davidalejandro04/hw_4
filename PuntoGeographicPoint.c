@@ -48,10 +48,26 @@ int main(void)
 	
 	fclose(abrir);
 
+
+	double xActual, xAnterior, yActual, yAnterior, rActual, rAnterior, alfa;
+
+	xAnterior = (2*aleatorio()*N/744);
+	yActual = (2*aleatorio()*N/500 );
+	printf("%lf %lf\n",xAnterior,yActual);
+	rAnterior = calcularRadio(xAnterior, yActual);
+	
+
 return 0;
 
 
 }
+
+
+double aleatorio(void)
+{
+    return (double) rand()/RAND_MAX;
+}
+
 
 void cargarDatos(double **matriz)
 {
